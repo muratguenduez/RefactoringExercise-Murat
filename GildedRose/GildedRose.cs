@@ -21,7 +21,9 @@ public class GildedRose
                 {
                     if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                     {
-                        Items[i].Quality = Items[i].Quality - 1;
+                        // Degrade twice as fast for Conjured items
+                        int degradeRate = Items[i].Name.Contains("Conjured") ? 2 : 1;
+                        Items[i].Quality = Items[i].Quality - degradeRate;
                     }
                 }
             }
@@ -52,11 +54,13 @@ public class GildedRose
                 }
             }
 
+            // Decrease SellIn value
             if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
             {
                 Items[i].SellIn = Items[i].SellIn - 1;
             }
 
+            // Handle post SellIn expiration cases
             if (Items[i].SellIn < 0)
             {
                 if (Items[i].Name != "Aged Brie")
@@ -67,7 +71,9 @@ public class GildedRose
                         {
                             if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                             {
-                                Items[i].Quality = Items[i].Quality - 1;
+                                // Degrade twice as fast for expired Conjured items
+                                int degradeRate = Items[i].Name.Contains("Conjured") ? 2 : 1;
+                                Items[i].Quality = Items[i].Quality - degradeRate;
                             }
                         }
                     }
@@ -83,6 +89,12 @@ public class GildedRose
                         Items[i].Quality = Items[i].Quality + 1;
                     }
                 }
+            }
+
+            // Ensure Quality is never negative
+            if (Items[i].Quality < 0)
+            {
+                Items[i].Quality = 0;
             }
         }
     }

@@ -11,10 +11,10 @@ dotnet build GildedRose.sln -c Debug
 
 ## Run the Gilded Rose Command-Line program
 
-For e.g. 10 days:
+For e.g. 30 days:
 
 ``` cmd
-GildedRose/bin/Debug/net8.0/GildedRose 10
+GildedRose/bin/Debug/net8.0/GildedRose 30
 ```
 
 ## Run all the unit tests
